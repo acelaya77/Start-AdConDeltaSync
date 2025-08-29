@@ -1,0 +1,40 @@
+# PowerShell module files
+*.ps1xml
+*.nupkg
+
+# Sensitive config files
+config.ini
+servers.txt
+
+# Bootstrap and local install scripts
+Install-DeltaSyncModule.ps1
+
+# Logs and temp files
+*.log
+*.tmp
+
+# IDE/editor files
+.vscode/
+.idea/
+*.suo
+*.user
+*.ps1~  # Backup files
+
+# OS-specific
+Thumbs.db
+.DS_Store
+
+# GitHub and CI/CD
+.env
+*.secret
+*.bak
+
+# Node/npm (if used for tooling)
+node_modules/
+package-lock.json
+
+# Python virtual environments (if used for tooling)
+venv/
+__pycache__/
+*.pyc
+initialize_*.py
