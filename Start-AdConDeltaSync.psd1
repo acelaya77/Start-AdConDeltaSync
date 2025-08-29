@@ -9,7 +9,7 @@
     PowerShellVersion = '5.1'
     CompatiblePSEditions = @('Desktop', 'Core')
     RequiredModules = @()
-    FunctionsToExport = @('Start-DeltaSync')
+    FunctionsToExport = @('Start-AdConDeltaSync')
     CmdletsToExport = @()
     VariablesToExport = @()
     AliasesToExport = @()
