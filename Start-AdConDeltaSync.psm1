@@ -54,10 +54,10 @@ function Start-AdConDeltaSync {
 
         if (-not $servers -or $servers.Count -eq 0) {
             $configPath = [System.IO.FileInfo](Join-Path $PSScriptRoot "config.ini")
-            $config = @()
+            $config = @{}
             if ( $configPath.Exists ){
                 foreach ( $line in $(get-Content $configPath)) {
-                    if ($line -match '^(\\w+)=(.+)$') {
+                    if ($line -match '^(\w+)=(.+)$') {
                         $config[$matches[1]] = $matches[2].Trim()
                     }
                 }
