@@ -1,3 +1,5 @@
+[CmdletBinding()]
+
 param (
     [Parameter(Mandatory)]
     [string]$NewVersion,
@@ -8,30 +10,44 @@ param (
     [switch]$PushTag
 )
 
-$modulePath = "Start-AdConDeltaSync"
+$modulePath = "."
 $psd1File = Join-Path $modulePath "Start-AdConDeltaSync.psd1"
 $changelogFile = Join-Path $modulePath "CHANGELOG.md"
 
 # Update version in .psd1
-(Get-Content $psd1File) -replace "ModuleVersion\\s*=\\s*'[^']+'", "ModuleVersion = '$NewVersion'" | Set-Content $psd1File
-Write-Host "✅ Updated version in manifest to $NewVersion"
+(Get-Content $psd1File) -replace "ModuleVersion\s*=\s*'[^']+'", $("ModuleVersion = '{0}'" -f $NewVersion) | Set-Content $psd1File
+$string = '✅ Updated version in manifest to {0}' -f $NewVersion
+Write-Host $string
 
 # Update CHANGELOG.md
 $today = Get-Date -Format "yyyy-MM-dd"
-$changelogHeader = "## [$NewVersion] - $today`n"
-$changelogBody = "### Changed`n- $ChangelogEntry`n`n"
+$changelogHeader = "## [{0}] - {1}`n" -f $NewVersion,$today
+$changelogBody = "### Changed`n- {0}`n`n" -f $ChangelogEntry
 $existingContent = Get-Content $changelogFile -Raw
 Set-Content $changelogFile -Value ($changelogHeader + $changelogBody + $existingContent)
-Write-Host "📝 Added changelog entry"
+$string = '📝 Added changelog entry'
+Write-Host $string
 
 # Commit and tag
-git add $psd1File $changelogFile
-git commit -m "Bump version to $NewVersion"
-git tag "v$NewVersion"
-Write-Host "🏷️  Created Git tag v$NewVersion"
+$command = "git add {0} {1}" -f $psd1File,$changelogFile
+$scriptBlock = [ScriptBlock]::Create($command)
+Invoke-Command $scriptBlock
+
+$command = "git commit -m ""Bump version to {0}""" -f $NewVersion
+$scriptBlock = [ScriptBlock]::Create($command)
+Invoke-Command $scriptBlock
+
+$command = "git tag ""v{0}""" -f $NewVersion
+$scriptBlock = [ScriptBlock]::Create($command)
+Invoke-Command $scriptBlock
+$string = '🏷️  Created Git tag v{0}' -f $NewVersion
+Write-Host $string
 
 # Optional push
 if ($PushTag) {
-    git push origin "v$NewVersion"
-    Write-Host "🚀 Pushed tag to origin"
+    $command = "git push origin ""v{0}""" -f $NewVersion
+    $scriptBlock = [ScriptBlock]::Create($command)
+    Invoke-Command $scriptBlock
+    $string = '🚀 Pushed tag to origin'
+    Write-Host $string
 }
