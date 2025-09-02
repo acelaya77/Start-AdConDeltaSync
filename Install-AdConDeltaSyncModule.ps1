@@ -29,9 +29,9 @@ if (-not (Test-Path $targetPath)) {
 # Copy module files
 Copy-Item -Path "$sourcePath\*" -Destination $targetPath -Recurse -Force
 
-Write-Host "✅ Module '$moduleName' installed to: $targetPath"
+Write-Verbose $("Module '{0}' installed to: {1}" -f $moduleName,$targetPath)
 
 if ($ImportAfterInstall) {
     Import-Module $moduleName -Force
-    Write-Host "📦 Module '$moduleName' imported."
+    Write-Verbose $("Module '{0}' imported." -f $moduleName)
 }

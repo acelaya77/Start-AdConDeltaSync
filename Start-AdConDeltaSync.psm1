@@ -28,8 +28,8 @@
     Runs the function with a custom list of servers and a sleep interval of 10 seconds.
 
 .NOTES
-    Author: Anthony J. Celaya  
-    Created: August 2025  
+    Author: Anthony J. Celaya
+    Created: August 2025
     Purpose: Automate delta sync initiation for Azure AD Connect in a multi-server setup.
 
     This function assumes that:
@@ -40,7 +40,7 @@
     https://learn.microsoft.com/en-us/azure/active-directory/hybrid/how-to-connect-sync-feature-scheduler
 #>
 function Start-AdConDeltaSync {
-    [CmdletBinding()]
+    [CmdletBinding(SupportsShouldProcess)]
     param (
         [Parameter()]
         [String[]]$Servers = @(),
@@ -101,7 +101,9 @@ function Start-AdConDeltaSync {
             Write-Warning ("{0:s}: '{1}' is in staging mode. Aborting sync." -f (Get-Date), $activeServer)
         } else {
             Write-Verbose ("{0:s}: Starting delta sync on '{1}'." -f (Get-Date), $activeServer)
-            Invoke-Command -ComputerName $activeServer -ScriptBlock { Start-ADSyncSyncCycle -PolicyType 'Delta' }
+            if ( $PsCmdlet.ShouldProcess("Server: $activeServer", "Start delta sync") ){
+                Invoke-Command -ComputerName $activeServer -ScriptBlock { Start-ADSyncSyncCycle -PolicyType 'Delta' }
+            }
         }
     }
 }
