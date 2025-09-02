@@ -38,3 +38,12 @@ venv/
 __pycache__/
 *.pyc
 initialize_*.py
+
+# Build artifacts
+bin/
+obj/
+
+# NuGet packaging
+*.nupkg
+*.nuspec
+# *.csproj
