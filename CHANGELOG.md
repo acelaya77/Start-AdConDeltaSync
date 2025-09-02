@@ -1,3 +1,7 @@
+## [1.0.11] - 2025-09-02
+### Changed
+- Exclude non-publishable files
+
 ## [1.0.10] - 2025-09-02
 ### Changed
 - Improved CI worklfow to exclude non-publishable files
@@ -35,6 +39,7 @@
 ## [1.0.0] - 2025-08-29
 ### Added
 - Initial release with delta sync functionality.
+
 
 
 
