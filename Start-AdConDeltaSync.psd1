@@ -12,7 +12,7 @@
 RootModule = 'Start-AdConDeltaSync.psm1'
 
 # Version number of this module.
-ModuleVersion = 'v1.0.11'
+ModuleVersion = '1.0.12'
 
 # Supported PSEditions
 CompatiblePSEditions = 'Desktop', 'Core'
