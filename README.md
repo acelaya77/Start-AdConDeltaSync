@@ -30,12 +30,12 @@ DeltaSync is a PowerShell module designed to automate the initiation of a delta 
    .\Install-DeltaSyncModule.ps1 -ImportAfterInstall
    ```
 
-### PowerShell Gallery (Coming Soon)
+### PowerShell Gallery
 
 Once published, you can install via:
 
 ```PowerShell
-Install-Module AdConDeltaSync -Scope CurrentUser
+Install-Module Start-AdConDeltaSync -Scope CurrentUser
 ```
 
 ### Usage
@@ -48,6 +48,17 @@ Start-AdConDeltaSync -SleepTimeSeconds 10 -Verbose
 
 - Servers: Servers to operate with. Example: `-Servers @('adcon1.domain.net','adcon2.domain.net')`
 - SleepTimeSeconds: Number of seconds to wait between sync status checks. Default is 8.
+
+### Config
+
+- Rename `config.sample.ini` to `config.ini`.
+- Edit config file to match your server names.
+
+```ini
+[servers]
+Primary=sadcon1.domain.net
+Secondary=sadcon2.domain.net
+```
 
 ### Contributing
 
