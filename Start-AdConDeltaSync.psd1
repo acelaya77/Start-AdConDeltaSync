@@ -12,7 +12,7 @@
 RootModule = 'Start-AdConDeltaSync.psm1'
 
 # Version number of this module.
-ModuleVersion = '1.0.6'
+ModuleVersion = '1.0.9'
 
 # Supported PSEditions
 CompatiblePSEditions = 'Desktop', 'Core'
@@ -95,7 +95,7 @@ PrivateData = @{
     PSData = @{
 
         # Tags applied to this module. These help with module discovery in online galleries.
-        Tags = 'Active Directory','AD Connect'
+        Tags = @('active-directory')
 
         # A URL to the license for this module.
         LicenseUri = 'https://github.com/acelaya77/Start-AdConDeltaSync/blob/a2f24cd64ea42104cceac9aea5ef3bebda6850c2/LICENSE'
